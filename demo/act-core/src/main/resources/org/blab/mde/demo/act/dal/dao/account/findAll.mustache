@@ -1,0 +1,12 @@
+select id, uid, code, name, type, parent_id as parentId, balance,
+deleted, created_by as createdBy, created_on as createdOn,
+updated_by as updatedBy, updated_on as updatedOn
+from account
+where 1=1
+{{#type}}
+  and type=:type
+{{/type}}
+{{#parentId}}
+  and parent_id=:parentId
+{{/parentId}}
+limit :pageSize offset :offset

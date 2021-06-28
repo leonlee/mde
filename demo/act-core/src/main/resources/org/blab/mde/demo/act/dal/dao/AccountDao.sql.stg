@@ -1,0 +1,71 @@
+group AccountDao;
+
+insert() ::= <<
+  insert into account (uid, code, name, type, balance,  created_by, created_on,  updated_by, updated_on)
+  values (:uid, :code, :name, :type, :balance, :createdBy, :createdOn,  :updatedBy, :updatedOn)
+>>
+
+insertAll() ::= <<
+  insert into account (uid, code, name, type, balance,  created_by, created_on,  updated_by, updated_on)
+  values (:uid, :code, :name, :type, :balance, :createdBy, :createdOn,  :updatedBy, :updatedOn)
+>>
+
+find() ::= <<
+  select id, uid, code, name, type, parent_id as parentId, balance,
+    deleted, created_by as createdBy, created_on as createdOn,
+    updated_by as updatedBy, updated_on as updatedOn
+  from account where id = :id
+  limit 1
+>>
+
+findBy(id, name) ::= <<
+  select id, uid, code, name, type, parent_id as parentId, balance,
+    deleted, created_by as createdBy, created_on as createdOn,
+    updated_by as updatedBy, updated_on as updatedOn
+  from account
+  <if(id || name)>
+  where <if(id)>id = :id<endif> <if(name)>and name = :name<endif>
+  <endif>
+  limit 1
+>>
+
+findAll(type, parentId) ::= <<
+  select id, uid, code, name, type, parent_id as parentId, balance,
+    deleted, created_by as createdBy, created_on as createdOn,
+    updated_by as updatedBy, updated_on as updatedOn
+  from account
+  <if(type || parentId)>
+  where <if(type)>type = :type<endif> <if(parentId)>and parent_id = :parentId<endif>
+  <endif>
+  limit :pageSize offset :offset
+>>
+
+delete() ::= <<
+  delete from account where id = :id
+>>
+
+deleteByName() ::= <<
+  delete from account where name = :name limit 1
+>>
+
+deleteAll() ::= <<
+  delete from account where id in (\<:ids\>)
+>>
+
+deleteAllBy(type, parentId) ::= <<
+  delete from account
+  <if(type || parentId)>
+  where <if(type)>type = :type<endif> <if(parentId)>and parent_id = :parentId<endif>
+  <endif>
+  limit :pageSize
+>>
+
+where(pairs) ::= <<
+  <if(pairs)>
+    where <condition(first(pairs))> <if(rest(pairs))><rest(pairs):{it|<andCondition(it)>}><endif>
+  <endif>
+>>
+
+condition(pair) ::= "<pair> = :<pair>"
+andCondition(pair) ::= "and <pair> = :<pair>"
+

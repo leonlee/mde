@@ -1,0 +1,59 @@
+{{#insert}}
+  {{> account:insert}}
+{{/insert}}
+
+{{#insertAll}}
+  insert into account (uid, code, name, type, balance,  created_by, created_on,  updated_by, updated_on)
+  values (:uid, :code, :name, :type, :balance, :createdBy, :createdOn,  :updatedBy, :updatedOn)
+{{/insertAll}}
+
+{{#find}}
+  select id, uid, code, name, type, parent_id as parentId, balance,
+  deleted, created_by as createdBy, created_on as createdOn,
+  updated_by as updatedBy, updated_on as updatedOn
+  from account where id = :id
+  limit 1
+{{/find}}
+
+{{#findBy}}
+  select id, uid, code, name, type, parent_id as parentId, balance,
+  deleted, created_by as createdBy, created_on as createdOn,
+  updated_by as updatedBy, updated_on as updatedOn
+  from account
+  where 1=1
+  {{#id}}
+    and id=:id
+  {{/id}}
+  {{#name}}
+    and name=:name
+  {{/name}}
+  limit 1
+{{/findBy}}
+
+{{#findAll}}
+  {{> :org:blab:mde:demo:act:dal:dao:account:findAll }}
+{{/findAll}}
+
+{{#delete}}
+  delete from account where id=:id
+{{/delete}}
+
+{{#deleteByname}}
+  delete from account where name=:name limit 1
+{{/deleteByname}}
+
+{{#deleteAll}}
+  delete from account where id in ( {{ids}} )
+{{/deleteAll}}
+
+{{#deleteAllBy}}
+  delete from account
+  where 1=1
+  {{#type}}
+    and type=:type
+  {{/type}}
+  {{#parentId}}
+    and parent_id=:parentId
+  {{/parentId}}
+  limit :pageSize
+{{/deleteAllBy}}

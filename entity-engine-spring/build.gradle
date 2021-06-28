@@ -1,0 +1,17 @@
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootDeps"
+    }
+}
+
+dependencies {
+    api project(':entity-engine')
+    api project(':core-spring')
+
+    api(libs.jdbi3.spring4) {
+    }
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework:spring-jdbc'
+}

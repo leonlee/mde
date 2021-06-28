@@ -1,0 +1,18 @@
+dependencyManagement {
+    imports {
+        mavenBom "org.junit:junit-bom:$junitJupiterVer"
+    }
+}
+dependencies {
+    api libs.slf4j.api
+    api libs.logback.classic
+    api libs.guava
+    api libs.hibernate.validator
+    api libs.hibernate.validatorCDI
+    api libs.bytebuddy
+    api libs.inject
+    api libs.commons.lang3
+    api(libs.reflections) {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+}

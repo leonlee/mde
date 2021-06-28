@@ -1,0 +1,20 @@
+spring:
+  flyway:
+    enabled: true
+    check-location: true
+    locations: classpath:db/dml/mysql
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      username: frontapp
+      password: 23123213
+      jdbc-url: jdbc:mysql://100.85.69.70:3031/act-core?autoReconnect=true&maxReconnects=10&useUnicode=true&characterEncoding=utf8
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      minimum-idle: 5
+      maximum-pool-size: 100
+      leak-detection-threshold: 30000
+

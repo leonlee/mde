@@ -1,0 +1,8 @@
+group ContactDao;
+
+insert(contact) ::= <<
+ <if (contact.name)>
+  insert into account (uid, code, name, type, balance,  created_by, created_on,  updated_by, updated_on)
+  values (:uid, :code, :name, :type, :balance, :createdBy, :createdOn,  :updatedBy, :updatedOn)
+ <endif>
+>>

@@ -1,0 +1,14 @@
+dependencyManagement {
+  imports {
+    mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootDeps"
+  }
+}
+
+dependencies {
+  implementation project(':core')
+
+  implementation 'org.springframework.boot:spring-boot-autoconfigure'
+  implementation 'org.springframework.boot:spring-boot-configuration-processor'
+  implementation 'org.springframework:spring-web'
+  implementation 'org.yaml:snakeyaml'
+}

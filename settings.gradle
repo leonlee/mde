@@ -1,0 +1,39 @@
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == 'io.spring.dependency-management') {
+                useModule("io.spring.gradle:dependency-management-plugin:$springDMVer")
+            }
+            if (requested.id.id == 'pl.allegro.tech.build.axion-release') {
+                useModule("pl.allegro.tech.build:axion-release-plugin:$axionReleaseVer")
+            }
+            if (requested.id.id == 'org.springframework.boot') {
+                useModule("org.springframework.boot:spring-boot-gradle-plugin:$sbGradleVer")
+            }
+        }
+    }
+}
+
+rootProject.name = 'mde'
+
+include 'core'
+include 'core-spring'
+include 'entity-engine'
+include 'entity-engine-spring'
+include 'event-engine'
+include 'event-engine-spring'
+include 'fsm-engine'
+include 'service-engine'
+include 'view-engine'
+include 'module-engine'
+include 'demo:act-core'
+include 'demo:act-ext'
+
+enableFeaturePreview('VERSION_CATALOGS')
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            from(files("./libs.versions.toml"))
+        }
+    }
+}

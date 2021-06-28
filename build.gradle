@@ -1,0 +1,131 @@
+plugins {
+    id 'io.spring.dependency-management'
+    id 'pl.allegro.tech.build.axion-release'
+
+    id 'java-library'
+    id 'maven-publish'
+}
+
+scmVersion {
+    ignoreUncommittedChanges = false
+
+    tag {
+        prefix = ''
+        localOnly = false
+    }
+
+    checks {
+        uncommittedChanges = true
+        aheadOfRemote = true
+        snapshotDependencies = true
+    }
+}
+
+allprojects {
+    group = mdeGroup
+    version = scmVersion.version
+
+    /**
+     * aliyun mirrors configuration, disabled by default
+     */
+    /*
+    repositories {
+        def ALIYUN_REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public'
+        def ALIYUN_JCENTER_URL = 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+
+        all { ArtifactRepository repo ->
+            if (repo instanceof MavenArtifactRepository) {
+                def url = repo.url.toString()
+                if (url.startsWith('https://repo1.maven.org/maven2')) {
+                    project.logger.lifecycle "Repository ${repo.url} replaced by $ALIYUN_REPOSITORY_URL."
+                    remove repo
+                }
+                if (url.startsWith('https://jcenter.bintray.com/')) {
+                    project.logger.lifecycle "Repository ${repo.url} replaced by $ALIYUN_JCENTER_URL."
+                    remove repo
+                }
+            }
+        }
+        maven {
+            url ALIYUN_REPOSITORY_URL
+            allowInsecureProtocol true
+        }
+        maven {
+            url ALIYUN_JCENTER_URL
+            allowInsecureProtocol true
+        }
+    }
+    */
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = javaSrcVer
+    targetCompatibility = javaTargetVer
+
+    compileJava {
+        options.compilerArgs << '-parameters'
+        options.encoding = 'UTF-8'
+    }
+
+    compileTestJava {
+        options.compilerArgs << '-parameters'
+        options.encoding = 'UTF-8'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.20'
+        annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+        testCompileOnly 'org.projectlombok:lombok:1.18.20'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+//        testImplementation "junit:junit"
+        testImplementation("org.junit.vintage:junit-vintage-engine:$junitJupiterVer") {
+//            exclude group: "org.hamcrest", module: "hamcrest-core"
+        }
+//        testImplementation "org.mockito:mockito-core"
+    }
+
+    test {
+        systemProperty 'spring.profiles.active', 'dev'
+    }
+
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
+        archiveClassifier = "sources"
+    }
+
+    publishing {
+//        repositories {
+//            maven {
+//                def releasesRepoUrl = mavenServer + mavenReleases
+//                def snapshotsRepoUrl = mavenServer + mavenSnapshots
+//                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+//
+//                credentials {
+//                    username = version.endsWith('SNAPSHOT') ? snapshotUsername : releaseUsername
+//                    password = version.endsWith('SNAPSHOT') ? snapshotPassword : releasePassword
+//                }
+//                authentication {
+//                    basic(BasicAuthentication)
+//                }
+//            }
+//        }
+
+        publications {
+            defaultPublication(MavenPublication) {
+                from components.java
+                artifact sourceJar
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+stages:
+  - build
+
+build-job:
+  stage : build
+  script:
+    - "echo $CI_BUILD_REF_NAME"
+    - "./gradlew clean build"

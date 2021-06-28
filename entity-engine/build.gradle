@@ -1,0 +1,18 @@
+dependencies {
+    api project(':core')
+    api(libs.jdbi3.core) {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    api(libs.jdbi3.sqlobject) {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    api(libs.jdbi3.stringtemplate4) {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    api(libs.jdbi3.vavr) {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    implementation(libs.freemarker)
+    implementation(libs.antlr4.runtime)
+    implementation(libs.jmustache)
+}

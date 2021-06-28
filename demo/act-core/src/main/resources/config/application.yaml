@@ -1,0 +1,18 @@
+mde:
+  core:
+    packages:
+    - org.blab.mde.demo.act
+    - org.blab.mde.demo.fin
+  properties[entity.mustache.cache-size]: 3000
+  properties[spring.preload]: false
+
+spring:
+  profiles:
+    active: dev
+logging:
+  config: classpath:logging/logback-spring.xml
+  path: ./logs/
+  file: ./logs/act-core.log
+  level:
+    root: INFO
+    org.blab.mde: INFO

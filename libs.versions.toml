@@ -1,0 +1,60 @@
+[versions]
+slf4j = "1.7.31"
+logback-classic = "1.2.3"
+nimbus-jose-jwt = "4.9"
+commons-codec = "1.1"
+guava = "20.0"
+jdbi3 = "3.5.1"
+okhttp = "3.4.1"
+lz4 = "1.3.0"
+servlet-api = "3.1.0"
+commons-lang3 = "3.4"
+fastjson = "1.2.48"
+mvn-publish = "2.5.3"
+springfox = "2.7.0"
+commons-configuration2 = "2.1.1"
+protobuf = "2.6.1"
+powermock = "2.0.0-beta.5"
+hikari = "2.7.4"
+hibernate-validator = "6.2.0.Final"
+hibernate-validatorCDI = "6.2.0.Final"
+bytebuddy = "1.9.16"
+reflections = "0.9.11"
+inject = "1"
+freemarker = "2.3.31"
+antlr4 = "4.8-1"
+jmustache = "1.15"
+semver = "0.9.0"
+
+[libraries]
+nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version.ref = "nimbus-jose-jwt" }
+commons-codec = { module = "commons-codec:commons-codec", version.ref = "commons-codec" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+jdbi3-core = { module = "org.jdbi:jdbi3-core", version.ref = "jdbi3" }
+jdbi3-sqlobject = { module = "org.jdbi:jdbi3-sqlobject", version.ref = "jdbi3" }
+jdbi3-stringtemplate4 = { module = "org.jdbi:jdbi3-stringtemplate4", version.ref = "jdbi3" }
+jdbi3-vavr = { module = "org.jdbi:jdbi3-spring4", version.ref = "jdbi3" }
+jdbi3-spring4 = { module = "org.jdbi:jdbi3-vavr", version.ref = "jdbi3" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+lz4 = { module = "netjpountz.lz4:lz4", version.ref = "lz4" }
+commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
+fastjson = { module = "com.alibaba:fastjson", version.ref = "fastjson" }
+servlet-api = { module = "javax.servlet:javax.servlet-api", version.ref = "servlet-api" }
+commons-configuration2 = { module = "org.apache.commons:commons-configuration2", version.ref = "commons-configuration2" }
+protobuf = { module = "com.google.protobuf:protobuf-java", version.ref = "protobuf" }
+powermock-junit4 = { module = "org.powermock:powermock-module-junit4", version.ref = "powermock" }
+powermock-api-mockito2 = { module = "org.powermock:powermock-api-mockito2", version.ref = "powermock" }
+hikari = { module = "com.zaxxer:HikariCP", version.ref = "hikari" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-classic" }
+hibernate-validator = { module = "org.hibernate:hibernate-validator", version.ref = "hibernate-validator" }
+hibernate-validatorCDI = { module = "org.hibernate:hibernate-validator-cdi", version.ref = "hibernate-validatorCDI" }
+bytebuddy = { module = "net.bytebuddy:byte-buddy", version.ref = "bytebuddy" }
+reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
+inject = { module = "javax.inject:javax.inject", version.ref = "inject" }
+freemarker = { module = "org.freemarker:freemarker", version.ref = "freemarker" }
+antlr4-runtime = { module = "org.antlr:antlr4-runtime", version.ref = "antlr4" }
+jmustache = { module = "com.samskivert:jmustache", version.ref = "jmustache" }
+semver = { module = "com.github.zafarkhaja:java-semver", version.ref = "semver" }
+
+[bundles]

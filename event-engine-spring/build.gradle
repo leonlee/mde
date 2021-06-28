@@ -1,0 +1,13 @@
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootDeps"
+    }
+}
+
+dependencies {
+    implementation project(':event-engine')
+
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+}

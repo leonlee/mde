@@ -1,0 +1,69 @@
+logging:
+  level:
+    root: ERROR
+    org.blab.mde: DEBUG
+    org.jdbi.v3: TRACE
+
+management:
+  health:
+    db:
+      enable: false
+  endpoints:
+    web:
+      base-path: /
+#      path-mapping:
+#        health: /info
+spring:
+  flyway:
+    enabled: true
+    check-location: true
+    locations: classpath:db/dml/h2
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.h2.Driver
+    hikari:
+      username: sa
+      password:
+      jdbc-url: jdbc:h2:mem:act_core;MODE=MYSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=3;INIT=CREATE SCHEMA IF NOT EXISTS \"public\"
+      pool-name: default
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      minimum-idle: 5
+      maximum-pool-size: 100
+      leak-detection-threshold: 30000
+  h2:
+    console:
+      settings:
+        trace: true
+app:
+  datasources:
+    fin:
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+      jdbc-url: jdbc:h2:mem:fin_core;MODE=MYSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=3;INIT=CREATE SCHEMA IF NOT EXISTS \"public\"
+      pool-name: fin
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      minimum-idle: 5
+      maximum-pool-size: 100
+      leak-detection-threshold: 30000
+    uc:
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+      jdbc-url: jdbc:h2:mem:uc_core;MODE=MYSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_FILE=3;INIT=CREATE SCHEMA IF NOT EXISTS \"public\"
+      pool-name: uc
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      minimum-idle: 5
+      maximum-pool-size: 100
+      leak-detection-threshold: 30000

@@ -1,0 +1,30 @@
+plugins {
+    id 'org.springframework.boot'
+}
+apply plugin: 'org.springframework.boot'
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+dependencies {
+    implementation(project(':entity-engine-spring')) {
+        exclude group: "org.springframework", module: "spring-web"
+    }
+    implementation project(':event-engine-spring')
+    implementation project(':fsm-engine')
+    implementation project(':service-engine')
+
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-hateoas"
+    implementation libs.hikari
+
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'com.h2database:h2'
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-test-autoconfigure")
+}
